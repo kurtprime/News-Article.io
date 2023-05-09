@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 import postsData from "./posts.json";
-import './App.css';
-import { PostsList } from './components/PostsList/PostsList';
+import "./App.css";
+import { PostsList } from "./components/PostsList";
 
 function App() {
   const [posts, setPosts] = useState(postsData);
@@ -25,9 +25,9 @@ function App() {
   */
   return (
     <div className="App">
-      <PostsList posts={posts}/>
+      <PostsList posts={posts} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

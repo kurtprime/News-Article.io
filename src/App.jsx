@@ -25,7 +25,9 @@ function App() {
        but until we learn how to interact with the API, for learning purposes - it's fine.
 
     Notes:
-    1. PostImage is a pre-built component that uploads and returns an image URL. {addImageSuccessful} is a prop from the component that is used to get the image file URL that you can attach to the post. No need to change any of the code of the component just use the function to get the image URL.
+    1. PostImage is a pre-built component that uploads and returns an image URL. {addImageSuccessful} is a 
+    prop from the component that is used to get the image file URL that you can attach to the post. No need
+     to change any of the code of the component just use the function to get the image URL.
   */
 
   // Example usage of the addImageSuccessful prop

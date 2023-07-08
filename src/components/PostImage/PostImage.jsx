@@ -5,7 +5,7 @@ export const PostImage = ({ props }) => {
 
   return (
     <form>
-      <button onClick={addImage}>Add Image</button>
+      <button onClick={addImage}>Add mage</button>
     </form>
   );
 };

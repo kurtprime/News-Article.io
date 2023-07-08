@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  font-family: 'Inter', sans-serif;
 }
 .image-uploader {
   width: 350px;
@@ -14,7 +14,7 @@
   border-radius: 5%;
   position: relative;
 }
-.image-uploader input[type="file"] {
+.image-uploader input[type='file'] {
   display: none;
 }
 .image-button {

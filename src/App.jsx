@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import postsData from './posts.json';
-import './App.css';
-import { PostsList } from './components/PostsList';
-import { PostImage } from './components/PostImage';
-import Header from './components/Header';
+import { useState } from "react";
+import postsData from "./posts.json";
+import "./App.css";
+import { PostsList } from "./components/PostsList";
+import { PostImage } from "./components/PostImage";
+import Header from "./components/Header";
 function App() {
   const [posts, setPosts] = useState(postsData);
 
@@ -36,9 +36,9 @@ function App() {
   };
 
   return (
-    <div className=' gap-[60px] h-screen w-screen '>
+    <div className=" gap-[60px] h-screen w-screen overflow-x-hidden">
       <Header />
-      <div className='App'>
+      <div className="App">
         <PostsList posts={posts} />
         {/* <PostImage addImageSuccessful={handleImageSuccess} /> */}
       </div>

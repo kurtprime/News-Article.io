@@ -39,7 +39,7 @@ function App() {
     <div className=" gap-[60px] h-screen w-screen overflow-x-hidden">
       <Header />
       <div className="App">
-        <PostsList posts={posts} />
+        <PostsList posts={posts} setPosts={setPosts} />
         {/* <PostImage addImageSuccessful={handleImageSuccess} /> */}
       </div>
     </div>

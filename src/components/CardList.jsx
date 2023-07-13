@@ -1,6 +1,12 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import { BsChatLeft, BsHeartFill, BsHeart } from "react-icons/bs";
 function CardList({ post }) {
+  function kFormatter(num) {
+    return Math.abs(num) > 999
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
+      : Math.sign(num) * Math.abs(num);
+  }
+
   return (
     <section className="h-auto w-auto rounded-md place-self-auto">
       <div className="w-80  h-[165px]">
@@ -23,7 +29,7 @@ function CardList({ post }) {
             </p>
           </div>
         </div>
-        <footer className="flex h-full justify-between">
+        <footer className="flex h-full mt-[10px] justify-between">
           <div className="flex gap-[5px] items-center h-full">
             <p className="text-center text-gray-400 text-[9px] font-normal leading-3">
               {post.date}
@@ -31,11 +37,42 @@ function CardList({ post }) {
             <p className="text-center text-gray-400 text-[8px] font-normal leading-[10.40px]">
               ·
             </p>
-            <p className="text-center text-gray-400 text-[9px] font-normal leading-3">
+            <p className="text-center text-ellipsis whitespace-nowrap text-gray-400 text-[9px] font-normal leading-3">
               {post.author}
             </p>
           </div>
-          <div className="flex items-center">start</div>
+          <div className="flex items-center gap-[10px]">
+            <div className="hover:text-blue-600 transition-all text-gray-400 gap-[5px] flex justify-center items-center">
+              <div className="hover:text-blue-600 transition-all text-gray-400 ">
+                <BsChatLeft />
+              </div>
+
+              <p className="text-[9px] font-normal leading-3">
+                {post.comments.length}
+              </p>
+            </div>
+            <div className="cursor-pointer ">
+              {post.isLiked ? (
+                <div className="flex hover:text-blue-600 gap-[5px] flex-row justify-center items-center">
+                  <div className="text-blue-600 ">
+                    <BsHeartFill />
+                  </div>
+                  <p className="text-gray-400 text-[9px] font-normal leading-3">
+                    {kFormatter(post.likes)}
+                  </p>
+                </div>
+              ) : (
+                <div className="flex hover:text-blue-600 gap-[5px] flex-row justify-center items-center">
+                  <div className="hover:text-blue-600 text-gray-400">
+                    <BsHeart />
+                  </div>
+                  <p className="text-gray-400 text-[9px] font-normal leading-3">
+                    {kFormatter(post.likes)}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
         </footer>
       </article>
     </section>

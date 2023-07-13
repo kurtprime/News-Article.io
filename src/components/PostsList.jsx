@@ -1,7 +1,7 @@
 import CardList from "./CardList";
 import Filter from "./Filter";
 
-export const PostsList = ({ posts }) => {
+export const PostsList = ({ posts, setPosts }) => {
   // TODO: the code below is just for demo,
   // so feel free to delete it and write your own.
   // document.getElementsByClassName("Post").style.backgroundColor = "blue";
@@ -10,7 +10,7 @@ export const PostsList = ({ posts }) => {
   return (
     <>
       <Filter />
-      <main className="w-full h-full flex justify-center ">
+      <main className="w-full h-full flex justify-center mb-[60px] ">
         <div className=" flex  justify-center items-center w-[1200px] gap-[40px] flex-wrap mx-[5%]">
           {mapCard}
           {/* <CardList key={posts[0].id} post={posts[0]} /> */}

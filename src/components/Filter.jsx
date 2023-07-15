@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 
-export default function Filter() {
+export default function Filter({ setFilter }) {
   const [toggle, setToggle] = useState(true);
   const [open, setOpen] = useState(true);
 
@@ -26,10 +26,20 @@ export default function Filter() {
       <div className="flex h-full w-screen justify-center">
         <div className="flex  mx-[5%] gap-[10px] w-[1200px] justify-between">
           <div className="flex items-center  gap-[10px]">
-            <button onClick={() => setToggle(true)} className={POSTS}>
+            <button
+              onClick={() => {
+                setToggle(true);
+                setFilter(toggle);
+              }}
+              className={POSTS}>
               All posts
             </button>
-            <button onClick={() => setToggle(false)} className={Favo}>
+            <button
+              onClick={() => {
+                setToggle(false);
+                setFilter(toggle);
+              }}
+              className={Favo}>
               Favorites
             </button>
           </div>

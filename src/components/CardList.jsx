@@ -1,12 +1,29 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { BsChatLeft, BsHeartFill, BsHeart } from "react-icons/bs";
-function CardList({ post }) {
+import { useState } from "react";
+
+function CardList({ post, setPosts }) {
+  const [ID, setID] = useState("");
+
   function kFormatter(num) {
     return Math.abs(num) > 999
       ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
       : Math.sign(num) * Math.abs(num);
   }
 
+  const handleLike = () =>
+    setPosts((current) =>
+      current.map((elem) => {
+        if (elem.id === post.id) {
+          return {
+            ...elem,
+            isLiked: !post.isLiked,
+            likes: !post.isLiked ? post.likes + 1 : post.likes - 1,
+          };
+        }
+        return elem;
+      })
+    );
   return (
     <section className="h-auto w-auto rounded-md place-self-auto">
       <div className="w-80  h-[165px]">
@@ -31,18 +48,18 @@ function CardList({ post }) {
         </div>
         <footer className="flex h-full mt-[10px] justify-between">
           <div className="flex gap-[5px] items-center h-full">
-            <p className="text-center text-gray-400 text-[9px] font-normal leading-3">
+            <p className="text-center whitespace-nowrap  text-gray-400 text-[9px] font-normal leading-3">
               {post.date}
             </p>
             <p className="text-center text-gray-400 text-[8px] font-normal leading-[10.40px]">
               ·
             </p>
-            <p className="text-center text-ellipsis whitespace-nowrap text-gray-400 text-[9px] font-normal leading-3">
+            <p className="text-center max-w-[110px] line-clamp-1 text-gray-400 text-[9px] font-normal leading-3">
               {post.author}
             </p>
           </div>
           <div className="flex items-center gap-[10px]">
-            <div className="hover:text-blue-600 transition-all text-gray-400 gap-[5px] flex justify-center items-center">
+            <div className="hover:text-blue-600 transition-all cursor-pointer text-gray-400 gap-[5px] flex justify-center items-center">
               <div className="hover:text-blue-600 transition-all text-gray-400 ">
                 <BsChatLeft />
               </div>
@@ -51,24 +68,24 @@ function CardList({ post }) {
                 {post.comments.length}
               </p>
             </div>
-            <div className="cursor-pointer ">
+            <div className="cursor-pointer" onClick={handleLike}>
               {post.isLiked ? (
-                <div className="flex hover:text-blue-600 gap-[5px] flex-row justify-center items-center">
-                  <div className="text-blue-600 ">
+                <div className="flex hover:text-blue-600  flex-row justify-center items-center">
+                  <div className="text-blue-600 flex flex-row gap-[5px] justify-center items-center">
                     <BsHeartFill />
+                    <p className="text-gray-400 text-[9px] font-normal leading-3">
+                      {kFormatter(post.likes)}
+                    </p>
                   </div>
-                  <p className="text-gray-400 text-[9px] font-normal leading-3">
-                    {kFormatter(post.likes)}
-                  </p>
                 </div>
               ) : (
-                <div className="flex hover:text-blue-600 gap-[5px] flex-row justify-center items-center">
-                  <div className="hover:text-blue-600 text-gray-400">
+                <div className="flex hover:text-blue-600  flex-row justify-center items-center">
+                  <div className="hover:text-blue-600 text-gray-400 flex flex-row gap-[5px] justify-center items-center">
                     <BsHeart />
+                    <p className="text-gray-400 text-[9px] font-normal leading-3">
+                      {kFormatter(post.likes)}
+                    </p>
                   </div>
-                  <p className="text-gray-400 text-[9px] font-normal leading-3">
-                    {kFormatter(post.likes)}
-                  </p>
                 </div>
               )}
             </div>

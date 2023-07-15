@@ -4,9 +4,11 @@ function Header() {
   return (
     <header className="bg-[#192140] h-[84px] w-sceen text-white flex justify-center mb-[60px]">
       <div className="flex items-center mx-[5%] w-[1200px] justify-between  ">
-        <h1 className="text-[yellow] text-[24px] font-[700] tracking-[2.4px] cursor-pointer">
+        <a
+          href="/"
+          className="text-[yellow] text-[24px] font-[700] tracking-[2.4px] cursor-pointer">
           LOGO
-        </h1>
+        </a>
 
         <div className="flex flex-row gap-[80px] text-[16px] font-medium">
           <div className="flex flex-row gap-[30px]">

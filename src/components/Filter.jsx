@@ -29,7 +29,7 @@ export default function Filter({ setFilter }) {
             <button
               onClick={() => {
                 setToggle(true);
-                setFilter(toggle);
+                setFilter(false);
               }}
               className={POSTS}>
               All posts
@@ -37,7 +37,7 @@ export default function Filter({ setFilter }) {
             <button
               onClick={() => {
                 setToggle(false);
-                setFilter(toggle);
+                setFilter(true);
               }}
               className={Favo}>
               Favorites

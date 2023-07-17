@@ -68,7 +68,7 @@ function CardList({ post, setPosts }) {
                 {post.comments.length}
               </p>
             </div>
-            <div className="cursor-pointer" onClick={handleLike}>
+            <button className="cursor-pointer" onClick={handleLike}>
               {post.isLiked ? (
                 <div className="flex hover:text-blue-600  flex-row justify-center items-center">
                   <div className="text-blue-600 flex flex-row gap-[5px] justify-center items-center">
@@ -88,7 +88,7 @@ function CardList({ post, setPosts }) {
                   </div>
                 </div>
               )}
-            </div>
+            </button>
           </div>
         </footer>
       </article>

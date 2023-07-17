@@ -5,7 +5,7 @@ function Header() {
     <header className="bg-[#192140] h-[84px] w-sceen text-white flex justify-center mb-[60px]">
       <div className="flex items-center mx-[5%] w-[1200px] justify-between  ">
         <a
-          href="/"
+          href="/ "
           className="text-[yellow] text-[24px] font-[700] tracking-[2.4px] cursor-pointer">
           LOGO
         </a>
@@ -22,7 +22,7 @@ function Header() {
             <h3 className="text-gray-400 text-[16px] font-bold leading-none self-center cursor-pointer">
               Sign up
             </h3>
-            <div className="Buttons cursor-pointer w-[86px] h-12 px-5 py-4 rounded-[40px] border border-blue-600 justify-center items-center gap-[5px] inline-flex">
+            <div className="Buttons my-[18px] cursor-pointer w-[86px] h-12 px-5 py-4 rounded-[40px] border border-blue-600 justify-center items-center gap-[5px] inline-flex">
               <div className="Title text-blue-600 text-[16px] font-semibold leading-none whitespace-nowrap">
                 Log in
               </div>

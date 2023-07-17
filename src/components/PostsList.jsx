@@ -15,7 +15,7 @@ export const PostsList = ({ posts, setPosts }) => {
     .map((post) => <CardList setPosts={setPosts} key={post.id} post={post} />);
 
   return (
-    <>
+    <div className=" min-h-[65vh]">
       <Filter setFilter={setFilter} />
       <main className="w-full h-full flex justify-center mb-[60px] ">
         <div className=" flex  justify-center items-center w-[1200px] gap-[40px] flex-wrap mx-[5%]">
@@ -30,6 +30,6 @@ export const PostsList = ({ posts, setPosts }) => {
           <li key={post.id}>{post.title}</li>
         ))}
       </ol> */}
-    </>
+    </div>
   );
 };

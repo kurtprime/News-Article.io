@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
-
+import { NavLink } from "react-router-dom";
 export default function Filter({ setFilter }) {
   const [toggle, setToggle] = useState(true);
   const [open, setOpen] = useState(true);
@@ -44,13 +44,14 @@ export default function Filter({ setFilter }) {
             </button>
           </div>
           <div className="flex items-center">
-            <button
+            <NavLink
+              to="create"
               className={Add}
               onClick={() => {
                 setOpen(!open);
               }}>
               <HiOutlinePlus size={70} /> Add post
-            </button>
+            </NavLink>
           </div>
         </div>
       </div>

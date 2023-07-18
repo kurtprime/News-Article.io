@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CardList from "./CardList";
-import Filter from "./Filter";
+import Filter from "../Filter";
 
 export const PostsList = ({ posts, setPosts }) => {
   // TODO: the code below is just for demo,
@@ -15,21 +15,22 @@ export const PostsList = ({ posts, setPosts }) => {
     .map((post) => <CardList setPosts={setPosts} key={post.id} post={post} />);
 
   return (
-    <div className=" min-h-[65vh]">
-      <Filter setFilter={setFilter} />
-      <main className="w-full h-full flex justify-center mb-[60px] ">
-        <div className=" flex  justify-center items-center w-[1200px] gap-[40px] flex-wrap mx-[5%]">
-          {mapCard}
-          {/* <CardList key={posts[0].id} post={posts[0]} /> */}
-        </div>
-      </main>
+    <div>
+      <div className=" min-h-[65vh]">
+        <Filter setFilter={setFilter} />
+        <main className="w-full h-full flex justify-center mb-[60px] ">
+          <div className=" flex  justify-center items-center w-[1200px] gap-[40px] flex-wrap mx-[5%]">
+            {mapCard}
+          </div>
+        </main>
 
-      {/* <h1>List of Post titles</h1>
+        {/* <h1>List of Post titles</h1>
       <ol>
         {posts.map((post) => (
           <li key={post.id}>{post.title}</li>
         ))}
       </ol> */}
+      </div>
     </div>
   );
 };

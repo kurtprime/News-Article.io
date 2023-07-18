@@ -1,13 +1,24 @@
 import { useState } from "react";
 import postsData from "./posts.json";
 import "./App.css";
-import { PostsList } from "./components/PostsList";
-import { PostImage } from "./components/PostImage";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import { PostsList } from "./components/pages/PostsList";
+import PostingImage from "./components/pages/PostingImage";
+
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
+import Layout from "./components/layout/Layout";
 
 function App() {
   const [posts, setPosts] = useState(postsData);
+
+  {
+    /* <PostsList posts={posts} setPosts={setPosts} />
+      <PostImage addImageSuccessful={handleImageSuccess} /> */
+  }
 
   /*
     TODO:
@@ -36,17 +47,22 @@ function App() {
   const handleImageSuccess = (imageUrl) => {
     console.log(imageUrl);
   };
-
-  return (
-    <div className="flex flex-col justify-between h-screen w-screen overflow-x-hidden">
-      <Header />
-      <div className="App">
-        <PostsList posts={posts} setPosts={setPosts} />
-        {/* <PostImage addImageSuccessful={handleImageSuccess} /> */}
-      </div>
-      <Footer />
-    </div>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Layout />}>
+        <Route
+          index
+          element={<PostsList posts={posts} setPosts={setPosts} />}
+        />
+        <Route
+          path="create"
+          element={<PostingImage addImageSuccessful={handleImageSuccess} />}
+        />
+      </Route>
+    )
   );
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

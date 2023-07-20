@@ -14,7 +14,7 @@ import Layout from "./components/layout/Layout";
 
 function App() {
   const [posts, setPosts] = useState(postsData);
-
+  const [url, setUrl] = useState("");
   {
     /* <PostsList posts={posts} setPosts={setPosts} />
       <PostImage addImageSuccessful={handleImageSuccess} /> */
@@ -45,8 +45,9 @@ function App() {
 
   // Example usage of the addImageSuccessful prop
   const handleImageSuccess = (imageUrl) => {
-    console.log(imageUrl);
+    setUrl(imageUrl);
   };
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
@@ -56,7 +57,14 @@ function App() {
         />
         <Route
           path="create"
-          element={<PostingImage addImageSuccessful={handleImageSuccess} />}
+          element={
+            <PostingImage
+              url={url}
+              setUrl={setUrl}
+              setPosts={setPosts}
+              addImageSuccessful={handleImageSuccess}
+            />
+          }
         />
       </Route>
     )

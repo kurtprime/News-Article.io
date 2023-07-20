@@ -7,6 +7,7 @@ export const PostImage = ({ addImageSuccessful }) => {
   // Added a spinner for user-experience and this component returns an image {fileURL}
   // Do not touch any of the code
 
+  const [hover, setHover] = useState(false);
   const imageInput = useRef();
   const [image, setImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -31,25 +32,44 @@ export const PostImage = ({ addImageSuccessful }) => {
 
   return (
     <div
+      onMouseOver={() => {
+        if (image) setHover(true);
+      }}
+      onMouseOut={() => {
+        if (image) setHover(false);
+      }}
       className="image-uploader"
       style={{
         backgroundImage: image ? `url(${image})` : "#f8f9fc",
         backgroundSize: "cover",
       }}>
       {isLoading ? <LoadingSpinner /> : ""}
-      <label
-        className="image-button"
-        style={{
-          display: image ? "none" : "block",
-        }}>
-        <input
-          type="file"
-          name="image_upload"
-          onChange={handleImageUpload}
-          ref={imageInput}
-        />
-        + Add Image
-      </label>
+
+      {!image ? (
+        <label
+          className="image-button"
+          style={{
+            display: image ? "none" : "block",
+          }}>
+          <input
+            type="file"
+            name="image_upload"
+            onChange={handleImageUpload}
+            ref={imageInput}
+          />
+          + Add Image
+        </label>
+      ) : (
+        <label className="image-button whitespace-nowrap transition-all hover:opacity-90 opacity-0">
+          <input
+            type="file"
+            name="image_upload"
+            onChange={handleImageUpload}
+            ref={imageInput}
+          />
+          + Add new Image
+        </label>
+      )}
     </div>
   );
 };

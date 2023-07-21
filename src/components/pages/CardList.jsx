@@ -1,9 +1,9 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { BsChatLeft, BsHeartFill, BsHeart } from "react-icons/bs";
-import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function CardList({ post, setPosts }) {
-  const [ID, setID] = useState("");
+  const cardURL = `post/${post.id}`;
 
   function kFormatter(num) {
     return Math.abs(num) > 999
@@ -25,8 +25,8 @@ function CardList({ post, setPosts }) {
       })
     );
   return (
-    <section className="h-auto w-auto rounded-md place-self-auto">
-      <div className="w-80  h-[165px]">
+    <section className="h-auto  w-auto rounded-md place-self-auto">
+      <NavLink to={cardURL} className="w-80  h-[165px]">
         <LazyLoadImage
           className="object-cover w-80 h-[165px] aspect-video rounded-t-md"
           src={post.image}
@@ -34,7 +34,7 @@ function CardList({ post, setPosts }) {
           width={320}
           alt={"https://via.placeholder.com/320x165"}
         />
-      </div>
+      </NavLink>
       <article className="w-80 h-[135px]    px-5 py-2.5 bg-slate-50 rounded-bl-md rounded-br-md flex-col justify-start  inline-flex">
         <div className="">
           <h3 className=" text-ellipsis  overflow-hidden whitespace-nowrap w-[280px] h-[26px] text-zinc-900 text-xl font-bold ">

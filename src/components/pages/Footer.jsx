@@ -6,9 +6,9 @@ import { BsFillPlayFill } from "react-icons/bs";
 
 function Footer() {
   return (
-    <footer className="w-screen bg-zinc-900 h-44 flex justify-center self-end items-center">
-      <div className="h-44 flex  w-[1200px] justify-center items-center">
-        <div className="mx-[5%] w-full h-14 flex justify-between">
+    <footer className="w-screen bg-zinc-900 h-full flex justify-center self-end items-center">
+      <div className="md:h-44 h-[213px] flex flex-wrap w-[1200px] justify-center md:items-center py-[40px]">
+        <div className="mx-[5%] w-full h-14 flex flex-wrap gap-[40px] items-center justify-between">
           <span className="h-[56px] w-[300px] flex flex-col gap-[10px]">
             <p className="text-white text-xs font-normal">Follow Us</p>
             <div className="flex gap-[15px]">

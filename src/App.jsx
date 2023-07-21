@@ -11,6 +11,7 @@ import {
   Route,
 } from "react-router-dom";
 import Layout from "./components/layout/Layout";
+import PostID from "./components/pages/PostID";
 
 function App() {
   const [posts, setPosts] = useState(postsData);
@@ -44,13 +45,31 @@ function App() {
   */
 
   // Example usage of the addImageSuccessful prop
+
+  //   <Route
+  //   path="post/:id"
+  //   element={
+  //     <>
+  //       <img src={posts[0].image} alt="asdsad" />
+  //       <h2>HELLO</h2>
+  //       <PostID setPosts={setPosts} posts={posts} />
+  //     </>
+  //   }
+  // />
+
   const handleImageSuccess = (imageUrl) => {
     setUrl(imageUrl);
   };
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Layout />}>
+      <Route
+        path="/"
+        element={
+          <>
+            <Layout />
+          </>
+        }>
         <Route
           index
           element={<PostsList posts={posts} setPosts={setPosts} />}
@@ -58,13 +77,19 @@ function App() {
         <Route
           path="create"
           element={
-            <PostingImage
-              url={url}
-              setUrl={setUrl}
-              setPosts={setPosts}
-              addImageSuccessful={handleImageSuccess}
-            />
+            <>
+              <PostingImage
+                url={url}
+                setUrl={setUrl}
+                setPosts={setPosts}
+                addImageSuccessful={handleImageSuccess}
+              />
+            </>
           }
+        />
+        <Route
+          path="post/:id"
+          element={<PostID setPosts={setPosts} posts={posts} />}
         />
       </Route>
     )

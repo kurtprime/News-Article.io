@@ -7,7 +7,6 @@ export const PostImage = ({ addImageSuccessful }) => {
   // Added a spinner for user-experience and this component returns an image {fileURL}
   // Do not touch any of the code
 
-  const [hover, setHover] = useState(false);
   const imageInput = useRef();
   const [image, setImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -32,13 +31,7 @@ export const PostImage = ({ addImageSuccessful }) => {
 
   return (
     <div
-      onMouseOver={() => {
-        if (image) setHover(true);
-      }}
-      onMouseOut={() => {
-        if (image) setHover(false);
-      }}
-      className="image-uploader"
+      className="image-uploader "
       style={{
         backgroundImage: image ? `url(${image})` : "#f8f9fc",
         backgroundSize: "cover",
@@ -60,7 +53,7 @@ export const PostImage = ({ addImageSuccessful }) => {
           + Add Image
         </label>
       ) : (
-        <label className="image-button whitespace-nowrap transition-all hover:opacity-90 opacity-0">
+        <label className="image-button whitespace-nowrap  transition-all hover:opacity-90 opacity-0">
           <input
             type="file"
             name="image_upload"

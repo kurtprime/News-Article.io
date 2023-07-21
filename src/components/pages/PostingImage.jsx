@@ -42,7 +42,7 @@ function PostingImage({ addImageSuccessful, url, setPosts, setUrl }) {
           id: current.length + 1,
           title: title,
           text: text,
-          author: "You",
+          author: "Anonymous (You)",
           image: url,
           date: `${months[month]} ${day}, ${year}`,
           likes: 0,
@@ -66,8 +66,9 @@ function PostingImage({ addImageSuccessful, url, setPosts, setUrl }) {
         } else {
           setBtnDesign(false);
         }
+        console.log(url);
       }}
-      className="h-full w-screen flex justify-center">
+      className="min-h-screen w-screen flex justify-center">
       <div className="w-[1200px] h-full  mb-[60px] mx-[5%]">
         <div className="flex  mb-[60px] flex-col gap-[40px]">
           <NavLink

@@ -75,7 +75,7 @@ function PostID({ setPosts, posts }) {
             Blog
           </div>
         </NavLink>
-        <div className="flex justify-center gap-[40px] md:flex-wrap-reverse flex-nowrap ">
+        <div className="flex justify-center gap-[40px] flex-wrap-reverse md:flex-nowrap ">
           <div className="flex flex-col flex-grow">
             <h1 className="text-zinc-900 text-4xl font-bold leading-[46.80px]">
               {posts[cardID].title}

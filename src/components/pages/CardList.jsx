@@ -60,9 +60,11 @@ function CardList({ post, setPosts }) {
           </div>
           <div className="flex items-center gap-[10px]">
             <div className="hover:text-blue-600 transition-all cursor-pointer text-gray-400 gap-[5px] flex justify-center items-center">
-              <div className="hover:text-blue-600 transition-all text-gray-400 ">
+              <NavLink
+                to={cardURL}
+                className="hover:text-blue-600 transition-all text-gray-400 ">
                 <BsChatLeft />
-              </div>
+              </NavLink>
 
               <p className="text-[9px] font-normal leading-3">
                 {post.comments.length}

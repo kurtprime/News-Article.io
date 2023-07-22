@@ -3,22 +3,48 @@ import { NavLink, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { BsChatLeft, BsHeartFill, BsHeart } from "react-icons/bs";
+import { element } from "prop-types";
 
 function PostID({ setPosts, posts }) {
   const { id } = useParams();
   const [cardID, setCardID] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const [text, setText] = useState("");
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const day = today.getDate();
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   const indexOfID = () => {
     setCardID(posts.findIndex((element) => element.id === Number(id)));
     setLoading(true);
   };
 
+  setTimeout(indexOfID, 1000);
+
   function kFormatter(num) {
     return Math.abs(num) > 999
       ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
       : Math.sign(num) * Math.abs(num);
   }
+
+  const showComments = () => setShow(true);
 
   const handleLike = () =>
     setPosts((current) =>
@@ -35,6 +61,104 @@ function PostID({ setPosts, posts }) {
         return elem;
       })
     );
+
+  const comments = posts[cardID].comments.map((element, i) => (
+    <div
+      key={i}
+      className="flex flex-row border-slate-100 border-solid border-b-2 py-[20px]  gap-[10px]">
+      <div>
+        <img src="/images/icon.jpg" alt="" />
+      </div>
+      <div className="flex flex-col gap-[10px]">
+        <h6 className="text-slate-500 text-sm font-bold leading-[14px]">
+          {element.author}
+        </h6>
+        <p className="text-zinc-900 text-sm font-normal leading-tight">
+          {element.text}
+        </p>
+
+        <div className="flex flex-row gap-[15px] items-center">
+          <p className="text-gray-400 text-xs font-normal leading-none">
+            {element.date}
+          </p>
+          <button className="cursor-pointer">
+            {element.isLiked ? (
+              <div
+                onClick={() =>
+                  setPosts((current) =>
+                    current.map((elem) => {
+                      const updateComments = elem.comments.map((comment) => {
+                        if (comment.text === element.text) {
+                          return {
+                            ...comment,
+                            isLiked: !comment.isLiked,
+                            likes: !comment.isLiked
+                              ? comment.likes + 1
+                              : comment.likes - 1,
+                          };
+                        }
+                        return comment;
+                      });
+
+                      return {
+                        ...elem,
+                        comments: updateComments,
+                      };
+                    })
+                  )
+                }
+                className="flex hover:text-blue-600  flex-row justify-center items-center">
+                <div className="text-blue-600 flex flex-row gap-[5px] justify-center items-center">
+                  <div>
+                    <BsHeartFill />
+                  </div>
+
+                  <p className="text-gray-400 text-[9px] font-normal leading-3">
+                    {kFormatter(element.likes)}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div
+                onClick={() =>
+                  setPosts((current) =>
+                    current.map((elem) => {
+                      const updateComments = elem.comments.map((comment) => {
+                        if (comment.text === element.text) {
+                          return {
+                            ...comment,
+                            isLiked: !comment.isLiked,
+                            likes: !comment.isLiked
+                              ? comment.likes + 1
+                              : comment.likes - 1,
+                          };
+                        }
+                        return comment;
+                      });
+
+                      return {
+                        ...elem,
+                        comments: updateComments,
+                      };
+                    })
+                  )
+                }
+                className="flex hover:text-blue-600  flex-row justify-center items-center">
+                <div className="hover:text-blue-600 text-gray-400 flex flex-row gap-[5px] justify-center items-center">
+                  <div>
+                    <BsHeart />
+                  </div>
+                  <p className="text-gray-400 text-[9px] font-normal leading-3">
+                    {kFormatter(element.likes)}
+                  </p>
+                </div>
+              </div>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  ));
 
   const loveBtn = (
     <button className="cursor-pointer" onClick={handleLike}>
@@ -59,8 +183,6 @@ function PostID({ setPosts, posts }) {
       )}
     </button>
   );
-
-  setTimeout(indexOfID, 1000);
 
   const reveal = (
     <main className="min-h-[80vh] w-screen flex justify-center">
@@ -113,10 +235,38 @@ function PostID({ setPosts, posts }) {
                 Leave a comment:
               </h3>
               <textarea
+                onChange={(e) => setText(e.target.value)}
+                value={text}
                 placeholder="Love seeing you guys having fun together! Can't wait to hang out with you guys again! 🤗"
                 className=" py-[15px] resize-none h-[100px] px-5 rounded-md border grow border-neutral-300 justify-start items-center gap-2.5 inline-flex text-zinc-900 text-base font-normal leading-tight"></textarea>
               <div className="flex justify-end">
-                <button className=" h-[50px] px-9 py-[13px] md:w-[210px] w-[100%] bg-blue-600 text-white text-base font-normal rounded-md justify-center items-center gap-[5px] inline-flex">
+                <button
+                  onClick={() => {
+                    if (text.length) setText("");
+                    if (text.length)
+                      return setPosts(
+                        posts.map((activeChat) => {
+                          if (activeChat.id === posts[cardID].id) {
+                            return {
+                              ...activeChat,
+                              comments: [
+                                {
+                                  text: text,
+                                  author: "Anonymous (You)",
+                                  date: `${months[month]} ${day}, ${year}`,
+                                  likes: 0,
+                                  isLiked: false,
+                                },
+                                ...activeChat.comments,
+                              ],
+                            };
+                          }
+                          return activeChat;
+                        })
+                      );
+                    alert("comment has no value");
+                  }}
+                  className=" h-[50px] px-9 py-[13px] md:w-[210px] w-[100%] bg-blue-600 text-white text-base font-normal rounded-md justify-center items-center gap-[5px] inline-flex">
                   send
                 </button>
               </div>
@@ -127,105 +277,18 @@ function PostID({ setPosts, posts }) {
                   Comments:
                 </h2>
                 <div className="flex flex-col gap-[10px]">
-                  {posts[cardID].comments.map((element, i) => (
-                    <div
-                      key={i}
-                      className="flex flex-row border-slate-100 border-solid border-b-2 py-[20px]  gap-[10px]">
-                      <div>
-                        <img src="/images/icon.jpg" alt="" />
-                      </div>
-                      <div className="flex flex-col gap-[10px]">
-                        <h6 className="text-slate-500 text-sm font-bold leading-[14px]">
-                          {element.author}
-                        </h6>
-                        <p className="text-zinc-900 text-sm font-normal leading-tight">
-                          {element.text}
-                        </p>
-
-                        <div className="flex flex-row gap-[15px] items-center">
-                          <p className="text-gray-400 text-xs font-normal leading-none">
-                            {element.date}
-                          </p>
-                          <button className="cursor-pointer">
-                            {element.isLiked ? (
-                              <div
-                                onClick={() =>
-                                  setPosts((current) =>
-                                    current.map((elem) => {
-                                      const updateComments = elem.comments.map(
-                                        (comment) => {
-                                          if (
-                                            comment.author === element.author
-                                          ) {
-                                            return {
-                                              ...comment,
-                                              isLiked: !comment.isLiked,
-                                            };
-                                          }
-                                          return comment;
-                                        }
-                                      );
-
-                                      return {
-                                        ...elem,
-                                        comments: updateComments,
-                                      };
-                                    })
-                                  )
-                                }
-                                className="flex hover:text-blue-600  flex-row justify-center items-center">
-                                <div className="text-blue-600 flex flex-row gap-[5px] justify-center items-center">
-                                  <div>
-                                    <BsHeartFill />
-                                  </div>
-
-                                  <p className="text-gray-400 text-[9px] font-normal leading-3">
-                                    {kFormatter(element.likes)}
-                                  </p>
-                                </div>
-                              </div>
-                            ) : (
-                              <div
-                                onClick={() =>
-                                  setPosts((current) =>
-                                    current.map((elem) => {
-                                      const updateComments = elem.comments.map(
-                                        (comment) => {
-                                          if (
-                                            comment.author === element.author
-                                          ) {
-                                            return {
-                                              ...comment,
-                                              isLiked: !comment.isLiked,
-                                            };
-                                          }
-                                          return comment;
-                                        }
-                                      );
-
-                                      return {
-                                        ...elem,
-                                        comments: updateComments,
-                                      };
-                                    })
-                                  )
-                                }
-                                className="flex hover:text-blue-600  flex-row justify-center items-center">
-                                <div className="hover:text-blue-600 text-gray-400 flex flex-row gap-[5px] justify-center items-center">
-                                  <div>
-                                    <BsHeart />
-                                  </div>
-                                  <p className="text-gray-400 text-[9px] font-normal leading-3">
-                                    {kFormatter(element.likes)}
-                                  </p>
-                                </div>
-                              </div>
-                            )}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                  {comments.length <= 2 || show ? (
+                    comments
+                  ) : (
+                    <>
+                      {comments.splice(0, 2)}
+                      <button
+                        onClick={showComments}
+                        className="w-[142px] mt-[40px] h-[50px] px-5 py-[13px] text-blue-600 text-base font-normal leading-normal rounded-[40px] border border-blue-600 justify-center items-center gap-[5px] inline-flex">
+                        Show more
+                      </button>
+                    </>
+                  )}
                 </div>
               </label>
             </section>

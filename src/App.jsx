@@ -3,6 +3,7 @@ import postsData from "./posts.json";
 import "./App.css";
 import { PostsList } from "./components/pages/PostsList";
 import PostingImage from "./components/pages/PostingImage";
+import ErrorPage from "./components/pages/ErrorPage";
 
 import {
   createBrowserRouter,
@@ -91,6 +92,7 @@ function App() {
           path="post/:id"
           element={<PostID setPosts={setPosts} posts={posts} />}
         />
+        <Route path="*" element={<ErrorPage />} />
       </Route>
     )
   );

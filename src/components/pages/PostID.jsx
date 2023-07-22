@@ -9,35 +9,6 @@ function PostID({ setPosts, posts }) {
   const [cardID, setCardID] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  //   () => {
-  //     setPosts((current) =>
-  //       current.map((elem) => {
-  //         if (elem.id === posts[cardID].id) {
-  //           const updatedComments = elem.comments.map(
-  //             (comment) => {
-  //               if (comment.text === element.text) {
-  //                 return {
-  //                   ...comment,
-  //                   isLiked: !comment.isLiked,
-  //                   likes: !comment.isLiked
-  //                     ? comment.likes + 1
-  //                     : comment.likes - 1,
-  //                 };
-  //               }
-  //               return comment;
-  //             }
-  //           );
-
-  //           return {
-  //             ...elem,
-  //             comments: updatedComments,
-  //           };
-  //         }
-  //         return elem;
-  //       })
-  //     );
-  //   }
-
   const indexOfID = () => {
     setCardID(posts.findIndex((element) => element.id === Number(id)));
     setLoading(true);
@@ -175,42 +146,75 @@ function PostID({ setPosts, posts }) {
                           <p className="text-gray-400 text-xs font-normal leading-none">
                             {element.date}
                           </p>
-                          <button
-                            className="cursor-pointer"
-                            onClick={() =>
-                              setPosts((current) =>
-                                current.map((elem) => {
-                                  if (elem.id === posts[cardID].id) {
-                                    return elem.comments.map((comment) => {
-                                      if (comment.text === element.text) {
-                                        return {
-                                          ...comment,
-                                          isLiked: !element.isLiked,
-                                          likes: !element.isLiked
-                                            ? element.likes + 1
-                                            : element.likes - 1,
-                                        };
-                                      }
-                                      return comment;
-                                    });
-                                  }
-                                  return elem;
-                                })
-                              )
-                            }>
+                          <button className="cursor-pointer">
                             {element.isLiked ? (
-                              <div className="flex hover:text-blue-600  flex-row justify-center items-center">
+                              <div
+                                onClick={() =>
+                                  setPosts((current) =>
+                                    current.map((elem) => {
+                                      const updateComments = elem.comments.map(
+                                        (comment) => {
+                                          if (
+                                            comment.author === element.author
+                                          ) {
+                                            return {
+                                              ...comment,
+                                              isLiked: !comment.isLiked,
+                                            };
+                                          }
+                                          return comment;
+                                        }
+                                      );
+
+                                      return {
+                                        ...elem,
+                                        comments: updateComments,
+                                      };
+                                    })
+                                  )
+                                }
+                                className="flex hover:text-blue-600  flex-row justify-center items-center">
                                 <div className="text-blue-600 flex flex-row gap-[5px] justify-center items-center">
-                                  <BsHeartFill />
+                                  <div>
+                                    <BsHeartFill />
+                                  </div>
+
                                   <p className="text-gray-400 text-[9px] font-normal leading-3">
                                     {kFormatter(element.likes)}
                                   </p>
                                 </div>
                               </div>
                             ) : (
-                              <div className="flex hover:text-blue-600  flex-row justify-center items-center">
+                              <div
+                                onClick={() =>
+                                  setPosts((current) =>
+                                    current.map((elem) => {
+                                      const updateComments = elem.comments.map(
+                                        (comment) => {
+                                          if (
+                                            comment.author === element.author
+                                          ) {
+                                            return {
+                                              ...comment,
+                                              isLiked: !comment.isLiked,
+                                            };
+                                          }
+                                          return comment;
+                                        }
+                                      );
+
+                                      return {
+                                        ...elem,
+                                        comments: updateComments,
+                                      };
+                                    })
+                                  )
+                                }
+                                className="flex hover:text-blue-600  flex-row justify-center items-center">
                                 <div className="hover:text-blue-600 text-gray-400 flex flex-row gap-[5px] justify-center items-center">
-                                  <BsHeart />
+                                  <div>
+                                    <BsHeart />
+                                  </div>
                                   <p className="text-gray-400 text-[9px] font-normal leading-3">
                                     {kFormatter(element.likes)}
                                   </p>

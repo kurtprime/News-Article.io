@@ -28,7 +28,6 @@ function Header() {
               className="text-[yellow] text-[24px] font-[700] tracking-[2.4px] cursor-pointer">
               LOGO
             </a>
-            <h2>Width: {windowSize.innerWidth}</h2>
 
             <div className="flex flex-row gap-[80px] text-[16px] font-medium">
               <div className="flex flex-row gap-[30px]">

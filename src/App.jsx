@@ -17,6 +17,7 @@ import PostID from "./components/pages/PostID";
 function App() {
   const [posts, setPosts] = useState(postsData);
   const [url, setUrl] = useState("");
+
   {
     /* <PostsList posts={posts} setPosts={setPosts} />
       <PostImage addImageSuccessful={handleImageSuccess} /> */

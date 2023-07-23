@@ -19,7 +19,7 @@ export default function Filter({ setFilter }) {
     open
       ? "bg-white text-gray-400 border-gray-400 hover:border-blue-600 hover:text-blue-600"
       : "bg-blue-600 text-white border-blue-600"
-  } transition-all text-blue-600 text-[16px] font-normal leading-normal whitespace-nowrap w-[136px] h-[50px] px-5 py-[13px] rounded-lg border justify-center items-center gap-[5px] inline-flex`;
+  } transition-all text-blue-600 rounded-full text-[16px] font-normal leading-normal whitespace-nowrap md:w-[136px] h-[50px] w-[50px] md:px-5 md:py-[13px]   md:rounded-lg border justify-center items-center gap-[5px] inline-flex`;
 
   return (
     <div className="filter mb-[40px]">
@@ -50,7 +50,8 @@ export default function Filter({ setFilter }) {
               onClick={() => {
                 setOpen(!open);
               }}>
-              <HiOutlinePlus size={70} /> Add post
+              <HiOutlinePlus />
+              <div className="md:block hidden"> Add post </div>
             </NavLink>
           </div>
         </div>

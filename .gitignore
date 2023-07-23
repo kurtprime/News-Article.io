@@ -14,7 +14,8 @@ dist
 dist-ssr
 *.local
 postcss.config.json
-
+package-lock.json
+package.json
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
